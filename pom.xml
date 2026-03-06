@@ -10,8 +10,8 @@
         <version>2.3.0</version>
     </parent>
 
-    <artifactId>onecx-workspace-svc</artifactId>
-    <name>OneCX Workspace Backend Service</name>
+    <artifactId>onecx-notification-svc</artifactId>
+    <name>OneCX Notification Backend Service</name>
     <version>999-SNAPSHOT</version>
 
     <dependencies>
@@ -108,7 +108,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-opentelemetry</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-redis-client</artifactId>
+        </dependency>
         <!-- OTHER -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -155,25 +158,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.tkit.maven</groupId>
-                <artifactId>tkit-docs-quarkus-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>docs</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>docs</goal>
-                        </goals>
-                        <configuration>
-                            <skipDocs>${skipDocs}</skipDocs>
-                            <openApiFiles>
-                                <openApiFile>onecx-workspace-v1.yaml</openApiFile>
-                            </openApiFiles>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <configuration>
@@ -200,6 +184,8 @@
                         <useJakartaEe>true</useJakartaEe>
                         <useSwaggerAnnotations>false</useSwaggerAnnotations>
                         <java17>true</java17>
+                        <useMutiny>true</useMutiny>
+                        <supportAsync>true</supportAsync>
                     </configOptions>
                 </configuration>
                 <executions>
@@ -209,116 +195,25 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>src/main/openapi/onecx-workspace-internal.yaml</inputSpec>
-                            <apiPackage>gen.org.tkit.onecx.workspace.rs.internal</apiPackage>
-                            <modelPackage>gen.org.tkit.onecx.workspace.rs.internal.model</modelPackage>
+                            <inputSpec>src/main/openapi/onecx-notification-internal.yaml</inputSpec>
+                            <apiPackage>gen.org.tkit.onecx.notification.rs.internal</apiPackage>
+                            <modelPackage>gen.org.tkit.onecx.notification.rs.internal.model</modelPackage>
                             <modelNameSuffix>DTO</modelNameSuffix>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>internal-user</id>
+                        <id>external-v1</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>src/main/openapi/onecx-user-internal.yaml</inputSpec>
-                            <apiPackage>gen.org.tkit.onecx.workspace.rs.user</apiPackage>
-                            <modelPackage>gen.org.tkit.onecx.workspace.rs.user.model</modelPackage>
-                            <modelNameSuffix>DTO</modelNameSuffix>
-                        </configuration>
-                    </execution>
-                     <execution>
-                        <id>v1</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>src/main/openapi/onecx-workspace-v1.yaml</inputSpec>
-                            <apiPackage>gen.org.tkit.onecx.workspace.rs.external.v1</apiPackage>
-                            <modelPackage>gen.org.tkit.onecx.workspace.rs.external.v1.model</modelPackage>
+                            <inputSpec>src/main/openapi/onecx-notification-v1.yaml</inputSpec>
+                            <apiPackage>gen.org.tkit.onecx.notification.rs.external.v1</apiPackage>
+                            <modelPackage>gen.org.tkit.onecx.notification.rs.external.v1.model</modelPackage>
                             <modelNameSuffix>DTOV1</modelNameSuffix>
-                            <apiNameSuffix>V1Api</apiNameSuffix>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>create-template</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>src/main/openapi/onecx-workspace-template-create.yaml</inputSpec>
-                            <apiPackage>gen.org.tkit.onecx.workspace.template.create</apiPackage>
-                            <modelPackage>gen.org.tkit.onecx.workspace.template.create.model</modelPackage>
-                            <modelNameSuffix>TemplateDTO</modelNameSuffix>
-                            <generateApis>false</generateApis>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>di-template</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>src/main/openapi/onecx-workspace-di-template.yaml</inputSpec>
-                            <apiPackage>gen.org.tkit.onecx.workspace.template.di</apiPackage>
-                            <modelPackage>gen.org.tkit.onecx.workspace.template.di.model</modelPackage>
-                            <modelNameSuffix>DI</modelNameSuffix>
-                            <generateApis>false</generateApis>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>exim-v1</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>src/main/openapi/onecx-workspace-exim-v1.yaml</inputSpec>
-                            <apiPackage>gen.org.tkit.onecx.workspace.rs.exim.v1</apiPackage>
-                            <modelPackage>gen.org.tkit.onecx.workspace.rs.exim.v1.model</modelPackage>
-                            <modelNameSuffix>DTOV1</modelNameSuffix>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>admin-v1</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>src/main/openapi/onecx-workspace-admin-v1.yaml</inputSpec>
-                            <apiPackage>gen.org.tkit.onecx.workspace.rs.admin.v1</apiPackage>
-                            <modelPackage>gen.org.tkit.onecx.workspace.rs.admin.v1.model</modelPackage>
-                            <modelNameSuffix>DTOAdminV1</modelNameSuffix>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>onecx-image-internal</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>src/main/openapi/onecx-image-internal.yaml</inputSpec>
-                            <apiPackage>gen.org.tkit.onecx.image.rs.internal</apiPackage>
-                            <modelPackage>gen.org.tkit.onecx.image.rs.internal.model</modelPackage>
-                            <generateModelTests>true</generateModelTests>
-                            <generateModelDocumentation>true</generateModelDocumentation>
-                            <typeMappings>File=byte[]</typeMappings>
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire-plugin.version}</version>
-                <configuration>
-                    <environmentVariables>
-                        <child5>interpolated5</child5>
-                        <child6>interpolated6</child6>
-                        <child7>interpolated7</child7>
-                        <child8>interpolated8</child8>
-                        <menuItem1>testItem1</menuItem1>
-                    </environmentVariables>
-                </configuration>
             </plugin>
         </plugins>
     </build>

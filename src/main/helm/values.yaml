@@ -1,7 +1,7 @@
 app:
   name: svc
   image:
-    repository: "onecx/onecx-workspace-svc"
+    repository: "onecx/onecx-notification-svc"
   db:
     enabled: true
   operator:
@@ -13,5 +13,5 @@ app:
             defaultClientScopes: [ ocx-tn:read ]
     microservice:
       spec:
-        description: OneCX Workspace Backend Service
-        name: OneCX Workspace SVC
+        description: OneCX Notification Backend Service
+        name: OneCX Notification SVC

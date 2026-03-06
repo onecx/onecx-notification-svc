@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "NOTIFICATION_META")
-public class NotificationMeta extends TraceableEntity {
+public class ContentMeta extends TraceableEntity {
 
     @TenantId
     @Column(name = "TENANT_ID")
@@ -24,7 +24,7 @@ public class NotificationMeta extends TraceableEntity {
     @Column(name = "VALUE")
     private String value;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "NOTIFICATION_ID")
     private Notification notification;
 

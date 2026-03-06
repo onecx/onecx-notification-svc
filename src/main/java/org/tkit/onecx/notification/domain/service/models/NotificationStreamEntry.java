@@ -1,15 +1,16 @@
-package org.tkit.onecx.notification.domain.service;
+package org.tkit.onecx.notification.domain.service.models;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
 public class NotificationStreamEntry {
-  private String id;
-  private String title;
-  private String body;
-  private String icon;
+    private String applicationId;
+    private String senderId;
+    private String receiverId;
+    private String title;
+    private String body;
+    private String icon;
+    private String severity;
 }

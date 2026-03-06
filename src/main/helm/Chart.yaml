@@ -1,12 +1,12 @@
 apiVersion: v2
-name: onecx-workspace-svc
+name: onecx-notification-svc
 version: 0.0.0
 appVersion: 0.0.0
-description: Onecx workspace service
+description: Onecx notification service
 keywords:
-  - tenant
+  - notification
 sources:
-  - https://github.com/onecx/onecx-workspace-svc
+  - https://github.com/onecx/onecx-notification-svc
 maintainers:
   - name: Tkit Developer
     email: tkit_dev@1000kit.org

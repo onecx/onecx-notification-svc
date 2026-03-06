@@ -1,0 +1,67 @@
+
+include::onecx-notification-svc-attributes.adoc[opts=optional]
+
+{docker-registry}[Link to Docker registry]
+
+== Default properties
+
+.{properties-file}
+[%collapsible]
+====
+[source,properties,subs=attributes+]
+----
+quarkus.datasource.db-kind=postgresql
+quarkus.datasource.jdbc.max-size=30
+quarkus.datasource.jdbc.min-size=10
+quarkus.datasource.metrics.enabled=true
+quarkus.hibernate-orm.database.generation=validate
+quarkus.hibernate-orm.multitenant=DISCRIMINATOR
+quarkus.hibernate-orm.jdbc.timezone=UTC
+quarkus.hibernate-orm.metrics.enabled=true
+quarkus.liquibase.migrate-at-start=true
+quarkus.liquibase.validate-on-migrate=true
+tkit.rs.context.tenant-id.enabled=false
+tkit.security.auth.enabled=false
+tkit.security-dynamic-test.openapi.enabled=false
+quarkus.redis.hosts=redis://localhost:6379
+quarkus.openapi-generator.codegen.mutiny.operation-ids."mutiny-multi-operation-ids"="dispatchNotification"
+%prod.quarkus.datasource.jdbc.url=${DB_URL:jdbc:postgresql://postgresdb:5432/onecx-notification?sslmode=disable}
+%prod.quarkus.datasource.username=${DB_USER:onecx-notification}
+%prod.quarkus.datasource.password=${DB_PWD:onecx-notification}
+%prod.quarkus.oidc-client.client-id=${quarkus.application.name}
+----
+====
+
+== Extensions
+.Extensions List
+[%collapsible]
+====
+include::onecx-notification-svc-extensions.adoc[opts=optional]
+====
+
+== Helm
+
+{helm-registry}[Link to Helm registry]
+
+.Default values in {helm-file}
+[source,yaml]
+----
+app:
+  name: svc
+  image:
+    repository: "onecx/onecx-notification-svc"
+  db:
+    enabled: true
+  operator:
+    keycloak:
+      client:
+        enabled: true
+        spec:
+          kcConfig:
+            defaultClientScopes: [ ocx-tn:read ]
+    microservice:
+      spec:
+        description: OneCX Notification Backend Service
+        name: OneCX Notification SVC
+
+----
