@@ -1,0 +1,17 @@
+app:
+  name: svc
+  image:
+    repository: "onecx/onecx-notification-svc"
+  db:
+    enabled: true
+  operator:
+    keycloak:
+      client:
+        enabled: true
+        spec:
+          kcConfig:
+            defaultClientScopes: [ ocx-no:write ]
+    microservice:
+      spec:
+        description: OneCX Notification Backend Service
+        name: OneCX Notification SVC

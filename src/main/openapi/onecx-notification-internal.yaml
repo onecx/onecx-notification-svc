@@ -1,0 +1,79 @@
+---
+openapi: 3.0.3
+info:
+ title: onecx-notification internal service
+ description: This API provides endpoints for managing notifications.
+ version: 1.0.0
+servers:
+ - url: "http://onecx-notification-svc:8080"
+tags:
+ - name: notificationInternal
+   description: Dispatching Notifications
+paths:
+ /internal/notifications/{id}/delivered:
+  get:
+   security:
+    - oauth2: [ ocx-no:write ]
+   tags:
+    - notificationInternal
+   description: Mark a notification as delivered
+   operationId: markNotificationAsDelivered
+   parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+       type: string
+   responses:
+    200:
+     description: Notification marked as delivered successfully.
+    400:
+     description: Bad request
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/ProblemDetailResponse'
+components:
+ securitySchemes:
+  oauth2:
+   type: oauth2
+   flows:
+    clientCredentials:
+     tokenUrl: https://oauth.simple.api/token
+     scopes:
+      onecx-no:all: Grants read and write access
+      ocx-no:write: Grants write access
+ schemas:
+  ProblemDetailResponse:
+   type: object
+   properties:
+    errorCode:
+     type: string
+    detail:
+     type: string
+    params:
+     type: array
+     items:
+      $ref: '#/components/schemas/ProblemDetailParam'
+    invalidParams:
+     type: array
+     items:
+      $ref: '#/components/schemas/ProblemDetailInvalidParam'
+  ProblemDetailParam:
+   type: object
+   properties:
+    key:
+     type: string
+    value:
+     type: string
+  ProblemDetailInvalidParam:
+   type: object
+   properties:
+    name:
+     type: string
+    message:
+     type: string
+  OffsetDateTime:
+   format: date-time
+   type: string
+   example: 2022-03-10T12:15:50-04:00

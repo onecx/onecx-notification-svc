@@ -1,0 +1,77 @@
+
+include::onecx-notification-svc-attributes.adoc[opts=optional]
+
+{docker-registry}[Link to Docker registry]
+
+== Default properties
+
+.{properties-file}
+[%collapsible]
+====
+[source,properties,subs=attributes+]
+----
+quarkus.datasource.db-kind=postgresql
+quarkus.datasource.jdbc.max-size=30
+quarkus.datasource.jdbc.min-size=10
+quarkus.datasource.metrics.enabled=true
+quarkus.http.auth.permission.health.paths=/q/*
+quarkus.http.auth.permission.health.policy=permit
+quarkus.http.auth.permission.default.paths=/*
+quarkus.http.auth.permission.default.policy=authenticated
+quarkus.hibernate-orm.database.generation=validate
+quarkus.hibernate-orm.jdbc.timezone=UTC
+quarkus.hibernate-orm.metrics.enabled=true
+quarkus.liquibase.migrate-at-start=true
+quarkus.liquibase.validate-on-migrate=true
+quarkus.oidc-client.client-id=${quarkus.application.name}
+quarkus.openapi-generator.codegen.input-base-dir=target/tmp/openapi
+%prod.quarkus.rest-client.onecx_notification_bff.url=http://onecx-notification-bff:8080
+%prod.quarkus.rest-client.onecx_notification_bff.providers=io.quarkus.oidc.client.reactive.filter.OidcClientRequestReactiveFilter
+quarkus.openapi-generator.codegen.spec.onecx_notification_bff_yaml.config-key=onecx_notification_bff
+quarkus.openapi-generator.codegen.spec.onecx_notification_bff_yaml.base-package=gen.org.tkit.onecx.notification.bff.client
+quarkus.openapi-generator.codegen.spec.onecx_notification_bff_yaml.return-response=true
+quarkus.openapi-generator.codegen.spec.onecx_notification_bff_yaml.additional-api-type-annotations=@org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
+quarkus.openapi-generator.codegen.spec.onecx_notification_bff_yaml.additional-model-type-annotations=@io.quarkus.runtime.annotations.RegisterForReflection;
+quarkus.openapi-generator.codegen.spec.onecx_notification_bff_yaml.enable-security-generation=false
+quarkus.openapi-generator.codegen.spec.onecx_notification_bff_yaml.model-name-suffix=BffDTO
+quarkus.openapi-generator.codegen.spec.onecx_notification_bff_yaml.api-name-suffix=BffApi
+%prod.quarkus.datasource.jdbc.url=${DB_URL:jdbc:postgresql://postgresdb:5432/onecx-notification?sslmode=disable}
+%prod.quarkus.datasource.username=${DB_USER:onecx-notification}
+%prod.quarkus.datasource.password=${DB_PWD:onecx-notification}
+%prod.quarkus.oidc-client.client-id=${quarkus.application.name}
+----
+====
+
+== Extensions
+.Extensions List
+[%collapsible]
+====
+include::onecx-notification-svc-extensions.adoc[opts=optional]
+====
+
+== Helm
+
+{helm-registry}[Link to Helm registry]
+
+.Default values in {helm-file}
+[source,yaml]
+----
+app:
+  name: svc
+  image:
+    repository: "onecx/onecx-notification-svc"
+  db:
+    enabled: true
+  operator:
+    keycloak:
+      client:
+        enabled: true
+        spec:
+          kcConfig:
+            defaultClientScopes: [ ocx-no:write ]
+    microservice:
+      spec:
+        description: OneCX Notification Backend Service
+        name: OneCX Notification SVC
+
+----
