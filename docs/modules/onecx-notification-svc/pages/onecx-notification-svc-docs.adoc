@@ -19,14 +19,11 @@ quarkus.http.auth.permission.health.policy=permit
 quarkus.http.auth.permission.default.paths=/*
 quarkus.http.auth.permission.default.policy=authenticated
 quarkus.hibernate-orm.database.generation=validate
-quarkus.hibernate-orm.multitenant=DISCRIMINATOR
 quarkus.hibernate-orm.jdbc.timezone=UTC
 quarkus.hibernate-orm.metrics.enabled=true
 quarkus.liquibase.migrate-at-start=true
 quarkus.liquibase.validate-on-migrate=true
-tkit.rs.context.tenant-id.enabled=false
-tkit.security.auth.enabled=true
-tkit.security-dynamic-test.openapi.enabled=false
+quarkus.oidc-client.client-id=${quarkus.application.name}
 quarkus.openapi-generator.codegen.input-base-dir=target/tmp/openapi
 %prod.quarkus.rest-client.onecx_notification_bff.url=http://onecx-notification-bff:8080
 %prod.quarkus.rest-client.onecx_notification_bff.providers=io.quarkus.oidc.client.reactive.filter.OidcClientRequestReactiveFilter
@@ -71,7 +68,7 @@ app:
         enabled: true
         spec:
           kcConfig:
-            defaultClientScopes: [ ocx-tn:read ]
+            defaultClientScopes: [ ocx-no:write ]
     microservice:
       spec:
         description: OneCX Notification Backend Service

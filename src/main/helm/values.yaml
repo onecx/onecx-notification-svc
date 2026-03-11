@@ -10,7 +10,7 @@ app:
         enabled: true
         spec:
           kcConfig:
-            defaultClientScopes: [ ocx-tn:read ]
+            defaultClientScopes: [ ocx-no:write ]
     microservice:
       spec:
         description: OneCX Notification Backend Service

@@ -8,12 +8,6 @@ h| Documentation
 h| Configuration
 h| Version
 
-| tkit-quarkus-data-import
-
-| https://1000kit.github.io/tkit-quarkus/current/tkit-quarkus/tkit-quarkus-data-import.html[Link]
-| https://github.com/1000kit/tkit-quarkus/blob/4.6.0/docs/modules/tkit-quarkus/pages/includes/tkit-quarkus-data-import.adoc[Link]
-| 4.6.0
-
 | tkit-quarkus-jpa
 
 | https://1000kit.github.io/tkit-quarkus/current/tkit-quarkus/tkit-quarkus-jpa.html[Link]
@@ -158,6 +152,12 @@ h| Version
 | https://github.com/quarkusio/quarkusio.github.io/blob/develop/_generated-doc/latest/config/quarkus-container-image-docker.adoc[Link]
 | 3.27.1
 
+
+| quarkus-openapi-generator-oidc
+
+| 
+| 
+| 2.13.0-lts
 
 
 |===

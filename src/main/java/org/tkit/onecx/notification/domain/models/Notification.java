@@ -15,7 +15,9 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "NOTIFICATION")
+@NamedEntityGraph(name = Notification.NOTIFICATION_FULL, includeAllAttributes = true)
 public class Notification extends TraceableEntity {
+    public static final String NOTIFICATION_FULL = "Notification.full";
 
     @Column(name = "APPLICATION_ID")
     private String applicationId;

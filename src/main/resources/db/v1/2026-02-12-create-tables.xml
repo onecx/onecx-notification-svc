@@ -40,9 +40,6 @@
             </column>
             <column name="key" type="VARCHAR(255)"/>
             <column name="notification_id" type="VARCHAR(255)"/>
-            <column name="tenant_id" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="value" type="VARCHAR(255)"/>
             <column name="creationuser" type="VARCHAR(255)"/>
             <column name="modificationuser" type="VARCHAR(255)"/>
@@ -51,16 +48,16 @@
     <changeSet author="dev (generated)" id="1772803630269-3">
         <addForeignKeyConstraint baseColumnNames="notification_id" baseTableName="notification_meta" constraintName="fknrk2up6petff48opu6a8vroq5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="guid" referencedTableName="notification" validate="true"/>
     </changeSet>
-        <changeSet author="dev (generated)" id="dataimportlog-1">
-            <createTable tableName="dataimportlog">
-                <column name="id" type="VARCHAR(255)">
-                    <constraints nullable="false" primaryKey="true" primaryKeyName="dataimportlog_pkey"/>
-                </column>
-                <column name="creationdate" type="TIMESTAMP WITHOUT TIME ZONE"/>
-                <column name="modificationdate" type="TIMESTAMP WITHOUT TIME ZONE"/>
-                <column name="file" type="VARCHAR(255)"/>
-                <column name="md5" type="VARCHAR(255)"/>
-                <column name="error" type="VARCHAR(255)"/>
-            </createTable>
-        </changeSet>
+<!--        <changeSet author="dev (generated)" id="dataimportlog-1">-->
+<!--            <createTable tableName="dataimportlog">-->
+<!--                <column name="id" type="VARCHAR(255)">-->
+<!--                    <constraints nullable="false" primaryKey="true" primaryKeyName="dataimportlog_pkey"/>-->
+<!--                </column>-->
+<!--                <column name="creationdate" type="TIMESTAMP WITHOUT TIME ZONE"/>-->
+<!--                <column name="modificationdate" type="TIMESTAMP WITHOUT TIME ZONE"/>-->
+<!--                <column name="file" type="VARCHAR(255)"/>-->
+<!--                <column name="md5" type="VARCHAR(255)"/>-->
+<!--                <column name="error" type="VARCHAR(255)"/>-->
+<!--            </createTable>-->
+<!--        </changeSet>-->
 </databaseChangeLog>
