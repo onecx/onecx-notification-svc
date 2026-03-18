@@ -3,5 +3,7 @@ include::onecx-notification-svc-attributes.adoc[opts=optional]
 = OneCX Notification Backend Service
 
 
+== Configuration
+include::onecx-notification-svc.adoc[opts=optional]
 
 include::onecx-notification-svc-docs.adoc[opts=optional]

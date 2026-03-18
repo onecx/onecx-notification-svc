@@ -1,0 +1,32 @@
+[.configuration-legend]
+icon:lock[title=Fixed at build time] Configuration property fixed at build time - All other configuration properties are overridable at runtime
+[.configuration-reference.searchable, cols="80,.^10,.^10"]
+|===
+
+h|[.header-title]##Configuration property##
+h|Type
+h|Default
+
+a| [[onecx-notification-svc_onecx-notification-scheduler-expression]] [.property-path]##link:#onecx-notification-svc_onecx-notification-scheduler-expression[`onecx.notification.scheduler.expression`]##
+ifdef::add-copy-button-to-config-props[]
+config_property_copy_button:+++onecx.notification.scheduler.expression+++[]
+endif::add-copy-button-to-config-props[]
+
+
+[.description]
+--
+Scheduler expression default: every hour
+
+
+ifdef::add-copy-button-to-env-var[]
+Environment variable: env_var_with_copy_button:+++ONECX_NOTIFICATION_SCHEDULER_EXPRESSION+++[]
+endif::add-copy-button-to-env-var[]
+ifndef::add-copy-button-to-env-var[]
+Environment variable: `+++ONECX_NOTIFICATION_SCHEDULER_EXPRESSION+++`
+endif::add-copy-button-to-env-var[]
+--
+|string
+|`+++0 0 * * * ?+++`
+
+|===
+
