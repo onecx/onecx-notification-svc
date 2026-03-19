@@ -24,7 +24,7 @@ public class NotificationDAO extends AbstractDAO<Notification> {
             cq.where(cb.equal(root.get(TraceableEntity_.ID), notificationId));
             this.getEntityManager().createQuery(cq).executeUpdate();
         } catch (Exception ex) {
-            throw handleConstraint(ex, ErrorKeys.ERROR_FIND_ALL_NOT_DELIVERED);
+            throw handleConstraint(ex, ErrorKeys.ERROR_MARK_AS_DELIVERED);
         }
     }
 
@@ -44,5 +44,6 @@ public class NotificationDAO extends AbstractDAO<Notification> {
 
     public enum ErrorKeys {
         ERROR_FIND_ALL_NOT_DELIVERED,
+        ERROR_MARK_AS_DELIVERED
     }
 }

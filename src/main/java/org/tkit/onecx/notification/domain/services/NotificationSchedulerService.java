@@ -29,8 +29,8 @@ public class NotificationSchedulerService {
 
     @Scheduled(identity = "notification.publish", cron = "${onecx.notification.scheduler.expression}")
     void republishPersistedNotifications() {
-        var notifications = notificationDAO.findAllNotDelivered();
         try {
+            var notifications = notificationDAO.findAllNotDelivered();
             notifications.forEach(notification -> {
                 try {
                     bffApi.dispatchNotification(mapper.mapToBffDTO(notification, true));

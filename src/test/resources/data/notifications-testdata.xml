@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <NOTIFICATION creationdate="2026-02-23" guid="1" optlock="0" application_id="app1" delivered="true" delivered_at="2026-02-23T10:00:00Z" issued_by="SYSTEM" modificationdate="2026-02-23" receiver_id="user2" sender_id="user1" sent_at="2026-02-23T09:00:00Z" severity="LOW"/>
+    <NOTIFICATION guid="2" optlock="0" application_id="app1" delivered="false" delivered_at="2026-02-23T10:00:00Z" issued_by="SYSTEM" modificationdate="2026-02-23" receiver_id="user2" sender_id="user1" sent_at="2026-02-23T09:00:00Z" severity="LOW"/>
+    <NOTIFICATION_META optlock="0" creationdate="2026-02-23" guid="1" key="key1" modificationdate="2026-02-23" notification_id="1" value="value1"/>
+</dataset>
