@@ -14,7 +14,7 @@ import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-public class NotificationDAOTest {
+class NotificationDAOTest {
     @Inject
     NotificationDAO dao;
 

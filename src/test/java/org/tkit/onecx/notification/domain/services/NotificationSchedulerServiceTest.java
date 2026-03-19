@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.HttpMethod;
 import jakarta.ws.rs.core.Response;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
@@ -48,6 +49,7 @@ class NotificationSchedulerServiceTest extends AbstractTest {
                         .withBody(JsonBody.json(notificationBffDTO)))
                 .respond(httpRequest -> response().withStatusCode(Response.Status.OK.getStatusCode())));
         service.republishPersistedNotifications();
+        Assertions.assertDoesNotThrow(() -> service.republishPersistedNotifications());
     }
 
     @Test
@@ -62,6 +64,7 @@ class NotificationSchedulerServiceTest extends AbstractTest {
                         .withBody(JsonBody.json(notificationBffDTO)))
                 .respond(httpRequest -> response().withStatusCode(Response.Status.BAD_REQUEST.getStatusCode())));
         service.republishPersistedNotifications();
+        Assertions.assertDoesNotThrow(() -> service.republishPersistedNotifications());
     }
 
 }

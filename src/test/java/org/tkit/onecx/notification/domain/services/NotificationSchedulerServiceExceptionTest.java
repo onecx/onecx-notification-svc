@@ -1,7 +1,6 @@
 package org.tkit.onecx.notification.domain.services;
 
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,13 +13,10 @@ import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-public class NotificationSchedulerServiceExceptionTest {
+class NotificationSchedulerServiceExceptionTest {
 
     @Inject
     NotificationSchedulerService service;
-
-    @InjectMock
-    EntityManager em;
 
     @InjectMock
     NotificationDAO dao;
