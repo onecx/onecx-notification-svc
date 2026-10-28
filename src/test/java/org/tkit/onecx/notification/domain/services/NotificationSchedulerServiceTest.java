@@ -23,7 +23,7 @@ import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 @WithDBData(value = {
-        "data/notifications-testdata.xml" }, deleteBeforeInsert = true, deleteAfterTest = true, rinseAndRepeat = true)
+        "data/notifications-testdata.xml" }, deleteBeforeInsert = true, rinseAndRepeat = true)
 class NotificationSchedulerServiceTest extends AbstractTest {
 
     @Inject

@@ -35,7 +35,7 @@ import io.quarkus.test.junit.QuarkusTest;
 @TestHTTPEndpoint(NotificationV1RestController.class)
 @GenerateKeycloakClient(clientName = "testClient", scopes = { "ocx-no:read", "ocx-no:write" })
 @WithDBData(value = {
-        "data/notifications-testdata.xml" }, deleteBeforeInsert = true, deleteAfterTest = true, rinseAndRepeat = true)
+        "data/notifications-testdata.xml" }, deleteBeforeInsert = true, rinseAndRepeat = true)
 class NotificationV1RestControllerTest extends AbstractTest {
 
     @InjectMockServerClient
